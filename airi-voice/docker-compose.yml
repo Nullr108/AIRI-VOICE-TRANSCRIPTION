@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  airi-voice:
+    build: ./app
+    container_name: airi-voice
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
